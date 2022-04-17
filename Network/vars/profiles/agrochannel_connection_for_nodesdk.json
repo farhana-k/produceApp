@@ -1,0 +1,204 @@
+{
+  "name": "fabric-network",
+  "x-type": "hlfv1",
+  "version": "1.0.0",
+  "channels": {
+    "agrochannel": {
+      "orderers": [
+        "orderer1.agro.com",
+        "orderer2.agro.com",
+        "orderer3.agro.com"
+      ],
+      "peers": [
+        "peer1.govt.agro.com",
+        "peer1.farmer.agro.com",
+        "peer1.buyer.agro.com"
+      ]
+    }
+  },
+  "organizations": {
+    "agro.com": {
+      "mspid": "agro-com",
+      "peers": [
+      ],
+      "orderers": [
+        "orderer1.agro.com",
+        "orderer2.agro.com",
+        "orderer3.agro.com"
+      ]
+    },
+    "buyer.agro.com": {
+      "mspid": "buyer-agro-com",
+      "peers": [
+        "peer1.buyer.agro.com"
+      ],
+      "orderers": [
+      ],
+      "certificateAuthorities": [
+        "ca1.buyer.agro.com"
+      ]
+    },
+    "farmer.agro.com": {
+      "mspid": "farmer-agro-com",
+      "peers": [
+        "peer1.farmer.agro.com"
+      ],
+      "orderers": [
+      ],
+      "certificateAuthorities": [
+        "ca1.farmer.agro.com"
+      ]
+    },
+    "govt.agro.com": {
+      "mspid": "govt-agro-com",
+      "peers": [
+        "peer1.govt.agro.com"
+      ],
+      "orderers": [
+      ],
+      "certificateAuthorities": [
+        "ca1.govt.agro.com"
+      ]
+    }
+  },
+  "orderers": {
+    "orderer1.agro.com": {
+      "url": "grpcs://10.0.2.15:7009",
+      "grpcOptions": {
+        "ssl-target-name-override": "orderer1.agro.com"
+      },
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICkDCCAjagAwIBAgIUYAbkZYB4sY5BoYbYKjzsvctPsj4wCgYIKoZIzj0EAwIw\nZDELMAkGA1UEBhMCVVMxFzAVBgNVBAgMDk5vcnRoIENhcm9saW5hMRAwDgYDVQQH\nDAdSYWxlaWdoMREwDwYDVQQKDAhhZ3JvLmNvbTEXMBUGA1UEAwwOdGxzY2EuYWdy\nby5jb20wHhcNMjIwNDE3MTUwMDM3WhcNMzIwNDE0MTUwMDM3WjBkMQswCQYDVQQG\nEwJVUzEXMBUGA1UECAwOTm9ydGggQ2Fyb2xpbmExEDAOBgNVBAcMB1JhbGVpZ2gx\nETAPBgNVBAoMCGFncm8uY29tMRcwFQYDVQQDDA50bHNjYS5hZ3JvLmNvbTBZMBMG\nByqGSM49AgEGCCqGSM49AwEHA0IABBvLVY6apM+0A0ruMilGI/nLGoCrsVwWKd4D\nRJr1yMAwE02PT41d/ZuJ7a4dhoyQu/nNCSBEEB+hYtpZcXtpCH+jgcUwgcIwHQYD\nVR0OBBYEFB3wPQ4geKmTLV0hLbuYJJfp/mRdMB8GA1UdIwQYMBaAFB3wPQ4geKmT\nLV0hLbuYJJfp/mRdMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgGmMB0G\nA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjBABgNVHREEOTA3hwQKAAIPgg50\nbHNjYS5hZ3JvLmNvbYIOdGxzY2EtYWdyby1jb22CCWxvY2FsaG9zdIcEfwAAATAK\nBggqhkjOPQQDAgNIADBFAiEAmMMITft/7XFs3+A978xxi6HkYXiKJy1JWH/JpI72\n/CsCIEJcSDe0QAWWHVQwl4372qfPrARzDDh9/h3FvLK8TT07\n-----END CERTIFICATE-----"
+      }
+    },
+    "orderer2.agro.com": {
+      "url": "grpcs://10.0.2.15:7010",
+      "grpcOptions": {
+        "ssl-target-name-override": "orderer2.agro.com"
+      },
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICkDCCAjagAwIBAgIUYAbkZYB4sY5BoYbYKjzsvctPsj4wCgYIKoZIzj0EAwIw\nZDELMAkGA1UEBhMCVVMxFzAVBgNVBAgMDk5vcnRoIENhcm9saW5hMRAwDgYDVQQH\nDAdSYWxlaWdoMREwDwYDVQQKDAhhZ3JvLmNvbTEXMBUGA1UEAwwOdGxzY2EuYWdy\nby5jb20wHhcNMjIwNDE3MTUwMDM3WhcNMzIwNDE0MTUwMDM3WjBkMQswCQYDVQQG\nEwJVUzEXMBUGA1UECAwOTm9ydGggQ2Fyb2xpbmExEDAOBgNVBAcMB1JhbGVpZ2gx\nETAPBgNVBAoMCGFncm8uY29tMRcwFQYDVQQDDA50bHNjYS5hZ3JvLmNvbTBZMBMG\nByqGSM49AgEGCCqGSM49AwEHA0IABBvLVY6apM+0A0ruMilGI/nLGoCrsVwWKd4D\nRJr1yMAwE02PT41d/ZuJ7a4dhoyQu/nNCSBEEB+hYtpZcXtpCH+jgcUwgcIwHQYD\nVR0OBBYEFB3wPQ4geKmTLV0hLbuYJJfp/mRdMB8GA1UdIwQYMBaAFB3wPQ4geKmT\nLV0hLbuYJJfp/mRdMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgGmMB0G\nA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjBABgNVHREEOTA3hwQKAAIPgg50\nbHNjYS5hZ3JvLmNvbYIOdGxzY2EtYWdyby1jb22CCWxvY2FsaG9zdIcEfwAAATAK\nBggqhkjOPQQDAgNIADBFAiEAmMMITft/7XFs3+A978xxi6HkYXiKJy1JWH/JpI72\n/CsCIEJcSDe0QAWWHVQwl4372qfPrARzDDh9/h3FvLK8TT07\n-----END CERTIFICATE-----"
+      }
+    },
+    "orderer3.agro.com": {
+      "url": "grpcs://10.0.2.15:7011",
+      "grpcOptions": {
+        "ssl-target-name-override": "orderer3.agro.com"
+      },
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICkDCCAjagAwIBAgIUYAbkZYB4sY5BoYbYKjzsvctPsj4wCgYIKoZIzj0EAwIw\nZDELMAkGA1UEBhMCVVMxFzAVBgNVBAgMDk5vcnRoIENhcm9saW5hMRAwDgYDVQQH\nDAdSYWxlaWdoMREwDwYDVQQKDAhhZ3JvLmNvbTEXMBUGA1UEAwwOdGxzY2EuYWdy\nby5jb20wHhcNMjIwNDE3MTUwMDM3WhcNMzIwNDE0MTUwMDM3WjBkMQswCQYDVQQG\nEwJVUzEXMBUGA1UECAwOTm9ydGggQ2Fyb2xpbmExEDAOBgNVBAcMB1JhbGVpZ2gx\nETAPBgNVBAoMCGFncm8uY29tMRcwFQYDVQQDDA50bHNjYS5hZ3JvLmNvbTBZMBMG\nByqGSM49AgEGCCqGSM49AwEHA0IABBvLVY6apM+0A0ruMilGI/nLGoCrsVwWKd4D\nRJr1yMAwE02PT41d/ZuJ7a4dhoyQu/nNCSBEEB+hYtpZcXtpCH+jgcUwgcIwHQYD\nVR0OBBYEFB3wPQ4geKmTLV0hLbuYJJfp/mRdMB8GA1UdIwQYMBaAFB3wPQ4geKmT\nLV0hLbuYJJfp/mRdMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgGmMB0G\nA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjBABgNVHREEOTA3hwQKAAIPgg50\nbHNjYS5hZ3JvLmNvbYIOdGxzY2EtYWdyby1jb22CCWxvY2FsaG9zdIcEfwAAATAK\nBggqhkjOPQQDAgNIADBFAiEAmMMITft/7XFs3+A978xxi6HkYXiKJy1JWH/JpI72\n/CsCIEJcSDe0QAWWHVQwl4372qfPrARzDDh9/h3FvLK8TT07\n-----END CERTIFICATE-----"
+      }
+    }
+  },
+  "peers": {
+    "peer1.govt.agro.com": {
+      "url": "grpcs://10.0.2.15:7003",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer1.govt.agro.com"
+      },
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICsjCCAligAwIBAgIUEtL6+EyG25IR0T6hkgK4KbDNi9kwCgYIKoZIzj0EAwIw\nbzELMAkGA1UEBhMCVVMxFzAVBgNVBAgMDk5vcnRoIENhcm9saW5hMRAwDgYDVQQH\nDAdSYWxlaWdoMRYwFAYDVQQKDA1nb3Z0LmFncm8uY29tMR0wGwYDVQQDDBR0bHNj\nYTEuZ292dC5hZ3JvLmNvbTAeFw0yMjA0MTcxNTA0MzJaFw0zMjA0MTQxNTA0MzJa\nMG8xCzAJBgNVBAYTAlVTMRcwFQYDVQQIDA5Ob3J0aCBDYXJvbGluYTEQMA4GA1UE\nBwwHUmFsZWlnaDEWMBQGA1UECgwNZ292dC5hZ3JvLmNvbTEdMBsGA1UEAwwUdGxz\nY2ExLmdvdnQuYWdyby5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATvULBz\nyntX+xC95doS4QTsMKkTJ/fDVZT5Ja/w/oiXISTvqjGy1FDGzhNtq5pqQ36hbQLj\nD24/9nwT1TdKuxblo4HRMIHOMB0GA1UdDgQWBBQW1VaFtiLefsPVKo2YdYSItv6d\nkjAfBgNVHSMEGDAWgBQW1VaFtiLefsPVKo2YdYSItv6dkjAPBgNVHRMBAf8EBTAD\nAQH/MA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUH\nAwIwTAYDVR0RBEUwQ4cECgACD4IUdGxzY2ExLmdvdnQuYWdyby5jb22CFHRsc2Nh\nMS1nb3Z0LWFncm8tY29tgglsb2NhbGhvc3SHBH8AAAEwCgYIKoZIzj0EAwIDSAAw\nRQIgA79idlJAylcxfgf7XeR+HgPCXc5536Xs7tXBkW5DxhkCIQCffCHdHshyh47z\nyCelfFOZyxSeMIs9DV4aG8vAjrLcGQ==\n-----END CERTIFICATE-----"
+      }
+    },
+    "peer1.farmer.agro.com": {
+      "url": "grpcs://10.0.2.15:7004",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer1.farmer.agro.com"
+      },
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICvjCCAmSgAwIBAgIUdUwvewTXZFIVe4UIngapeSVOLYAwCgYIKoZIzj0EAwIw\nczELMAkGA1UEBhMCVVMxFzAVBgNVBAgMDk5vcnRoIENhcm9saW5hMRAwDgYDVQQH\nDAdSYWxlaWdoMRgwFgYDVQQKDA9mYXJtZXIuYWdyby5jb20xHzAdBgNVBAMMFnRs\nc2NhMS5mYXJtZXIuYWdyby5jb20wHhcNMjIwNDE3MTUwMzMzWhcNMzIwNDE0MTUw\nMzMzWjBzMQswCQYDVQQGEwJVUzEXMBUGA1UECAwOTm9ydGggQ2Fyb2xpbmExEDAO\nBgNVBAcMB1JhbGVpZ2gxGDAWBgNVBAoMD2Zhcm1lci5hZ3JvLmNvbTEfMB0GA1UE\nAwwWdGxzY2ExLmZhcm1lci5hZ3JvLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEH\nA0IABOqDiZOqfq4ZPZ+hKWQqBqRcVJ6AYEPI/mJYMBb0uZrbnUE1G1ndDjPnpS7I\nUks1ifJYn/hvzg0ylPG4IeOMnBWjgdUwgdIwHQYDVR0OBBYEFO7O4xyrjcIZwIQu\n4CSQ4hE4R43HMB8GA1UdIwQYMBaAFO7O4xyrjcIZwIQu4CSQ4hE4R43HMA8GA1Ud\nEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMB\nBggrBgEFBQcDAjBQBgNVHREESTBHhwQKAAIPghZ0bHNjYTEuZmFybWVyLmFncm8u\nY29tghZ0bHNjYTEtZmFybWVyLWFncm8tY29tgglsb2NhbGhvc3SHBH8AAAEwCgYI\nKoZIzj0EAwIDSAAwRQIhANAeVDY7sQ0sau1wkibOdCC1OGUUj6eDF0yUnz9G3kmq\nAiBuJQEkWegrSeEUfmsHIn8/mqdUEO6GQUWsTu6DhWJP5g==\n-----END CERTIFICATE-----"
+      }
+    },
+    "peer1.buyer.agro.com": {
+      "url": "grpcs://10.0.2.15:7005",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer1.buyer.agro.com"
+      },
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICuDCCAl6gAwIBAgIUJDETIj4Qm4mZm9gEN1opzJebUjIwCgYIKoZIzj0EAwIw\ncTELMAkGA1UEBhMCVVMxFzAVBgNVBAgMDk5vcnRoIENhcm9saW5hMRAwDgYDVQQH\nDAdSYWxlaWdoMRcwFQYDVQQKDA5idXllci5hZ3JvLmNvbTEeMBwGA1UEAwwVdGxz\nY2ExLmJ1eWVyLmFncm8uY29tMB4XDTIyMDQxNzE1MDIzNVoXDTMyMDQxNDE1MDIz\nNVowcTELMAkGA1UEBhMCVVMxFzAVBgNVBAgMDk5vcnRoIENhcm9saW5hMRAwDgYD\nVQQHDAdSYWxlaWdoMRcwFQYDVQQKDA5idXllci5hZ3JvLmNvbTEeMBwGA1UEAwwV\ndGxzY2ExLmJ1eWVyLmFncm8uY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE\nmpfQ7oN4TlaLKQE2VNBicnnsW5P2jswnjLxigPmGpfKunRJjPPs9ixNb09i14QhR\nV33UhcCbPmL2LgSZGBdz9KOB0zCB0DAdBgNVHQ4EFgQUURtDnBxwHoisBQ2fyTsV\nICpwhekwHwYDVR0jBBgwFoAUURtDnBxwHoisBQ2fyTsVICpwhekwDwYDVR0TAQH/\nBAUwAwEB/zAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsG\nAQUFBwMCME4GA1UdEQRHMEWHBAoAAg+CFXRsc2NhMS5idXllci5hZ3JvLmNvbYIV\ndGxzY2ExLWJ1eWVyLWFncm8tY29tgglsb2NhbGhvc3SHBH8AAAEwCgYIKoZIzj0E\nAwIDSAAwRQIhAMI5vxKOhV77Ymc8c4+e9Hp8HBl1gbUWENYU/dgRfg7+AiAgoeJG\np4e96gclCzxAtgNLHVKRgGlxwzRCbbKqWRDgqw==\n-----END CERTIFICATE-----"
+      }
+    }
+  },
+  "certificateAuthorities": {
+    "ca1.govt.agro.com": {
+      "url": "https://10.0.2.15:7000",
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICpTCCAkygAwIBAgIUIjfIQF6hi3S/ACm6dIu4zKq6vHEwCgYIKoZIzj0EAwIw\nbDELMAkGA1UEBhMCVVMxFzAVBgNVBAgMDk5vcnRoIENhcm9saW5hMRAwDgYDVQQH\nDAdSYWxlaWdoMRYwFAYDVQQKDA1nb3Z0LmFncm8uY29tMRowGAYDVQQDDBFjYTEu\nZ292dC5hZ3JvLmNvbTAeFw0yMjA0MTcxNTA0MzFaFw0zMjA0MTQxNTA0MzFaMGwx\nCzAJBgNVBAYTAlVTMRcwFQYDVQQIDA5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBwwH\nUmFsZWlnaDEWMBQGA1UECgwNZ292dC5hZ3JvLmNvbTEaMBgGA1UEAwwRY2ExLmdv\ndnQuYWdyby5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATc187d6Q7B7lE4\n60tVmIhJs+187ZFwOs6jP1qKeTqxzyzf1Q0VtmYelEwvt8JOoZQ5vgyME2IVdPWc\n0VSFmpDGo4HLMIHIMB0GA1UdDgQWBBSw9/kZT7patOmB1g/0GAOZkISfMjAfBgNV\nHSMEGDAWgBSw9/kZT7patOmB1g/0GAOZkISfMjAPBgNVHRMBAf8EBTADAQH/MA4G\nA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwRgYD\nVR0RBD8wPYcECgACD4IRY2ExLmdvdnQuYWdyby5jb22CEWNhMS1nb3Z0LWFncm8t\nY29tgglsb2NhbGhvc3SHBH8AAAEwCgYIKoZIzj0EAwIDRwAwRAIgMYPi0uwGJbFe\nMe545Hoiz1RhopBb5C9eFQ/fF4akFTECIH47I1n9Ia3bzHYvg/JNHnU7tKk+JC7+\np1iSFtxwsE1z\n-----END CERTIFICATE-----"
+      },
+      "httpOptions": { "verify": "false" },
+      "caName": "ca1",
+      "registrar": { "enrollId": "admin", "enrollSecret": "adminpw" }
+    },
+    "ca1.farmer.agro.com": {
+      "url": "https://10.0.2.15:7001",
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICszCCAligAwIBAgIUOI/It8Nz01B2EVlf7QzamsrpqmwwCgYIKoZIzj0EAwIw\ncDELMAkGA1UEBhMCVVMxFzAVBgNVBAgMDk5vcnRoIENhcm9saW5hMRAwDgYDVQQH\nDAdSYWxlaWdoMRgwFgYDVQQKDA9mYXJtZXIuYWdyby5jb20xHDAaBgNVBAMME2Nh\nMS5mYXJtZXIuYWdyby5jb20wHhcNMjIwNDE3MTUwMzMyWhcNMzIwNDE0MTUwMzMy\nWjBwMQswCQYDVQQGEwJVUzEXMBUGA1UECAwOTm9ydGggQ2Fyb2xpbmExEDAOBgNV\nBAcMB1JhbGVpZ2gxGDAWBgNVBAoMD2Zhcm1lci5hZ3JvLmNvbTEcMBoGA1UEAwwT\nY2ExLmZhcm1lci5hZ3JvLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABL55\njso6xoHbq7IBPjN4DWU+HIffp+zy2sWEFfTbBzn3AW9OmSOtll1390QiTaE3LPq2\nf/Fd2u3t/5kaK6Khzz+jgc8wgcwwHQYDVR0OBBYEFAOEwOHsMMHTRhHzLmaxzgjL\n8/KQMB8GA1UdIwQYMBaAFAOEwOHsMMHTRhHzLmaxzgjL8/KQMA8GA1UdEwEB/wQF\nMAMBAf8wDgYDVR0PAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEF\nBQcDAjBKBgNVHREEQzBBhwQKAAIPghNjYTEuZmFybWVyLmFncm8uY29tghNjYTEt\nZmFybWVyLWFncm8tY29tgglsb2NhbGhvc3SHBH8AAAEwCgYIKoZIzj0EAwIDSQAw\nRgIhAI8VBQIesypfn5IGxASlm8oFchf16e10CgCugwmH7vjrAiEAyk48I5WpykcH\nvP/1UN2dsPLzP9HrucMuVyA5SSO/Ppg=\n-----END CERTIFICATE-----"
+      },
+      "httpOptions": { "verify": "false" },
+      "caName": "ca1",
+      "registrar": { "enrollId": "admin", "enrollSecret": "adminpw" }
+    },
+    "ca1.buyer.agro.com": {
+      "url": "https://10.0.2.15:7002",
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICrDCCAlKgAwIBAgIUQnXhLo1bKvVJbudZ/NL4E3EAdrUwCgYIKoZIzj0EAwIw\nbjELMAkGA1UEBhMCVVMxFzAVBgNVBAgMDk5vcnRoIENhcm9saW5hMRAwDgYDVQQH\nDAdSYWxlaWdoMRcwFQYDVQQKDA5idXllci5hZ3JvLmNvbTEbMBkGA1UEAwwSY2Ex\nLmJ1eWVyLmFncm8uY29tMB4XDTIyMDQxNzE1MDIzNFoXDTMyMDQxNDE1MDIzNFow\nbjELMAkGA1UEBhMCVVMxFzAVBgNVBAgMDk5vcnRoIENhcm9saW5hMRAwDgYDVQQH\nDAdSYWxlaWdoMRcwFQYDVQQKDA5idXllci5hZ3JvLmNvbTEbMBkGA1UEAwwSY2Ex\nLmJ1eWVyLmFncm8uY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAELtv5ljwv\n4CSbK2G+IfwZ/srIcE8IwyO3dbnaGSgqrNE1lgmksMIlH7LQH6jLPMYwtDrkJ7eG\nSV883r/S3485kKOBzTCByjAdBgNVHQ4EFgQUL9iQ6FFh77K+CgRphDyO1QmiBdAw\nHwYDVR0jBBgwFoAUL9iQ6FFh77K+CgRphDyO1QmiBdAwDwYDVR0TAQH/BAUwAwEB\n/zAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMC\nMEgGA1UdEQRBMD+HBAoAAg+CEmNhMS5idXllci5hZ3JvLmNvbYISY2ExLWJ1eWVy\nLWFncm8tY29tgglsb2NhbGhvc3SHBH8AAAEwCgYIKoZIzj0EAwIDSAAwRQIhANgI\ntlrFc8xI/FybyUupBVtciJNY5SKirOVydcnTBiGoAiAQM9FHJoh6ZXKyxMGJUS29\ndOCqju4Jg/C8Sj0zwGmbsA==\n-----END CERTIFICATE-----"
+      },
+      "httpOptions": { "verify": "false" },
+      "caName": "ca1",
+      "registrar": { "enrollId": "admin", "enrollSecret": "adminpw" }
+    }
+  },
+  "entityMatchers": {
+    "orderer": [
+      { "mappedHost": "orderer1.agro.com",
+        "pattern": "(\\w*)orderer1.agro.com(\\w*)",
+        "sslTargetOverrideUrlSubstitutionExp": "orderer1.agro.com",
+        "urlSubstitutionExp": "10.0.2.15:7009"
+      },
+      { "mappedHost": "orderer2.agro.com",
+        "pattern": "(\\w*)orderer2.agro.com(\\w*)",
+        "sslTargetOverrideUrlSubstitutionExp": "orderer2.agro.com",
+        "urlSubstitutionExp": "10.0.2.15:7010"
+      },
+      { "mappedHost": "orderer3.agro.com",
+        "pattern": "(\\w*)orderer3.agro.com(\\w*)",
+        "sslTargetOverrideUrlSubstitutionExp": "orderer3.agro.com",
+        "urlSubstitutionExp": "10.0.2.15:7011"
+      }
+    ],
+    "peer": [
+      { "mappedHost": "peer1.govt.agro.com",
+        "pattern": "(\\w*)peer1.govt.agro.com(\\w*)",
+        "sslTargetOverrideUrlSubstitutionExp": "peer1.govt.agro.com",
+        "urlSubstitutionExp": "10.0.2.15:7003"
+      },
+      { "mappedHost": "peer1.farmer.agro.com",
+        "pattern": "(\\w*)peer1.farmer.agro.com(\\w*)",
+        "sslTargetOverrideUrlSubstitutionExp": "peer1.farmer.agro.com",
+        "urlSubstitutionExp": "10.0.2.15:7004"
+      },
+      { "mappedHost": "peer1.buyer.agro.com",
+        "pattern": "(\\w*)peer1.buyer.agro.com(\\w*)",
+        "sslTargetOverrideUrlSubstitutionExp": "peer1.buyer.agro.com",
+        "urlSubstitutionExp": "10.0.2.15:7005"
+      }
+    ],
+  "certificateAuthorities": [
+      { "mappedHost": "ca1.govt.agro.com",
+        "pattern": "(\\w*)ca1.govt.agro.com(\\w*)",
+        "sslTargetOverrideUrlSubstitutionExp": "ca1.govt.agro.com",
+        "urlSubstitutionExp": "10.0.2.15:7000"
+      },
+      { "mappedHost": "ca1.farmer.agro.com",
+        "pattern": "(\\w*)ca1.farmer.agro.com(\\w*)",
+        "sslTargetOverrideUrlSubstitutionExp": "ca1.farmer.agro.com",
+        "urlSubstitutionExp": "10.0.2.15:7001"
+      },
+      { "mappedHost": "ca1.buyer.agro.com",
+        "pattern": "(\\w*)ca1.buyer.agro.com(\\w*)",
+        "sslTargetOverrideUrlSubstitutionExp": "ca1.buyer.agro.com",
+        "urlSubstitutionExp": "10.0.2.15:7002"
+      }
+    ]
+  }
+}

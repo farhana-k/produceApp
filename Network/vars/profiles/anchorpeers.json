@@ -1,0 +1,35 @@
+{
+  "buyer-agro-com": {
+    "AnchorPeers": {
+      "mod_policy": "Admins",
+      "value": {
+        "anchor_peers": [
+           { "host": "10.0.2.15", "port": "7005" }
+        ]
+      },
+      "version": "0"
+    }
+  },
+  "farmer-agro-com": {
+    "AnchorPeers": {
+      "mod_policy": "Admins",
+      "value": {
+        "anchor_peers": [
+           { "host": "10.0.2.15", "port": "7004" }
+        ]
+      },
+      "version": "0"
+    }
+  },
+  "govt-agro-com": {
+    "AnchorPeers": {
+      "mod_policy": "Admins",
+      "value": {
+        "anchor_peers": [
+           { "host": "10.0.2.15", "port": "7003" }
+        ]
+      },
+      "version": "0"
+    }
+  }
+}
