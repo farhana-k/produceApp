@@ -171,6 +171,32 @@ class ProduceContract extends Contract {
         return allResult;
     }
 
+    async checkMatchingOrders(ctx, productId) {
+        const exists = await this.produceExists(ctx, productId);
+        if (!exists) {
+            throw new Error(`The Product with ID ${productId} does not exist`);
+        }
+
+        const productBuffer = await ctx.stub.getState(productId);
+        const productDetails = JSON.parse(productBuffer.toString());
+
+        const queryString = {
+            selector: {
+                assetType: 'order',
+                productName: productDetails.productName,
+                quantity: productDetails.quantity,
+            },
+        };
+
+        const orderContract = new OrderContract();
+        const orders = await orderContract.queryAllOrders(
+            ctx,
+            JSON.stringify(queryString)
+        );
+
+        return orders;
+    }
+
 
 }
 

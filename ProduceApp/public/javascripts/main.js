@@ -4,22 +4,20 @@
 // }
 
 function swalBasic(data) {
-    // swal.fire({
-        swal({
+    swal.fire({
         // toast: true,
         icon: `${data.icon}`,
         title: `${data.title}`,
-        type : "Success"
-        // animation: true,
-        // position: 'center',
-        // showConfirmButton: true,
-        // footer: `${data.footer}`,
-        // timer: 3000,
-        // timerProgressBar: true,
-        // didOpen: (toast) => {
-        //     toast.addEventListener('mouseenter', swal.stopTimer)
-        //     toast.addEventListener('mouseleave', swal.resumeTimer)
-        // }
+        animation: true,
+        position: 'center',
+        showConfirmButton: true,
+        footer: `${data.footer}`,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', swal.stopTimer)
+            toast.addEventListener('mouseleave', swal.resumeTimer)
+        }
     })
 }
 
@@ -107,9 +105,10 @@ function FarmQueryData(){
     event.preventDefault();
     const Id = document.getElementById('productId').value;
     
-    // console.log(Id);
+     console.log(Id);
 
     if (Id.length==0) {
+        console.log("id idade")
         const data = {
             title: "Enter a Valid product Id",
             footer: "This is a mandatory field",
@@ -130,7 +129,8 @@ function FarmQueryData(){
             return response.json();
         })
         .then(function (ProductData){
-            dataBuf = ProductData["ProductData"]
+            dataBuf = ProductData["Producedata"]
+            console.log(dataBuf);
             swal.fire({
                 // toast: true,
                 icon: `success`,
@@ -158,67 +158,15 @@ function FarmQueryData(){
     }
 }
 
-//Method to get the history of an item
-function getItemHistory(carId) {
-    console.log("postalId", carId)
-    window.location.href = '/itemhistory?carId=' + carId;
-}
+// //Method to get the history of an item
+// function getItemHistory(carId) {
+//     console.log("postalId", carId)
+//     window.location.href = '/itemhistory?carId=' + carId;
+// }
 
-function getMatchingOrders(carId) {
-    console.log("carId",carId)
-    window.location.href = 'matchOrder?carId=' + carId;
-}
-
-function RegisterCar(){
-    console.log("Entered the register function")
-    event.preventDefault();
-    const QVinNumb = document.getElementById('QVinNumb').value;
-    const carOwner = document.getElementById('carOwner').value;
-    const regNumber = document.getElementById('regNumber').value;
-    console.log(QVinNumb+carOwner+regNumber);
-
-    if (QVinNumb.length==0||carOwner.length==0||regNumber.length==0) {
-        const data = {
-            title: "You have missed something",
-            footer: "All fields are mandatory",
-            icon: "warning"
-        }
-        swalBasic(data)   
-    }
-    else{
-        fetch('/registerCar',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',              
-            },
-            body: JSON.stringify({QVinNumb: QVinNumb, carOwner: carOwner, regNumber: regNumber})
-        })
-        .then(function(response){
-            if(response.status === 200){
-            const data = {
-                title: `Registered car ${QVinNumb} to ${carOwner}`,
-                footer: "Registered car",
-                icon: "success"
-            }
-            swalBasic(data)
-            } else {
-                const data = {
-                    title: `Failed to register car`,
-                    footer: "Please try again !!",
-                    icon: "error"
-                }
-                swalBasic(data)           
-            }
-        })
-        .catch(function(err){
-            const data = {
-                title: "Error in processing Request",
-                footer: "Something went wrong !",
-                icon: "error"
-            }
-            swalBasic(data);         
-        })    
-    }
+function getMatchingOrders(productId) {
+    // console.log("productId",productId)
+    window.location.href = 'matchOrder?productId=' + productId;
 }
 
 function createOrder() {

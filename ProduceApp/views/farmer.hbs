@@ -131,7 +131,7 @@
 <div class="container-fluid">
     <div class="row rowBox" >
         <div class="col-md-3 col-sm-12"></div>
-        <div class="col-md-6 col-sm-12">
+        {{!-- <div class="col-md-6 col-sm-12"> --}}
             <div class="card">
                 <div class="card-header" style="background-color:tomato">
                     <legend class="text-center" >Products Available</legend>
@@ -141,7 +141,7 @@
       <table class="table" style="width:100%">
           <thead id="colored-table">
               <th>Product Id</th>
-              <th>Product Name</th>
+              <th>Product</th>
               <th>Date Harvested</th>
               <th>Expiry Date</th>
               <th>Owned By</th>
@@ -150,18 +150,18 @@
           </thead>
           <tbody>
               {{#each itemList}}
-              {{#ifequals this.Record.status "In Factory"}}
+              {{!-- {{#ifequals this.Record.status "In Farm"}} --}}
               <tr>
                   <td>{{this.Key}}</td>
-                  <td>{{this.Record.productName}}</td>
+                  <td>{{this.Record.produceName}}</td>
                   <td>{{this.Record.harvestDate}}</td>
                   <td>{{this.Record.bestBefore}}</td>
-                  <td>{{this.Record.farmName}}</td>
+                  <td>{{this.Record.ownedBy}}</td>
                   <td>{{this.Record.quantity}}</td>
                   <td><button class="btn btn-success filled" onClick="getMatchingOrders('{{this.Key}}');">Check for orders</button></td>
 
               </tr>
-              {{/ifequals}}
+              {{!-- {{/ifequals}} --}}
               {{/each}}
           </tbody>
       </table>

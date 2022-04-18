@@ -108,6 +108,7 @@ router.post('/farmerwrite',function(req,res){
 
 router.post('/farmread',async function(req,res){
   const Id = req.body.Id;
+  console.log(Id)
   let FarmerClient = new clientApplication();
   
   FarmerClient.generatedAndEvaluateTxn( 
@@ -119,6 +120,7 @@ router.post('/farmread',async function(req,res){
     "readProduce", Id)
     .then(message => {
       
+      console.log(message.toString())
       res.status(200).send({ Producedata : message.toString() });
     }).catch(error =>{
      
@@ -173,55 +175,41 @@ router.post('/createOrder',async function(req,res){
   res.render('manufacturer', {view: "carEvents", results: result })
 })
 
-// router.post('/farmerwrite',function(req,res){
-
-//   const produceId = req.body.produceId;
-//   const produceName = req.body.produceName;
-//   const harvestDate = req.body.harvestDate;
-//   const bestBefore = req.body.bestBefore;
-//   const farmName = req.body.farmName;
-//   const quantity = req.body.quantity;
-
-//   // console.log("Request Object",req)
-//   let FarmerClient = new clientApplication();
+ //Find matching orders
+ router.get('/matchOrder',async function(req,res){
+  const productId = req.query.productId;
+ 
+  let farmerClient = new clientApplication();
   
-//   FarmerClient.generatedAndSubmitTxn(
-//       "farmer",
-//       "Admin",
-//       "agrochannel", 
-//       "Chaincode",
-//       "ProduceContract",
-//       "createProduce",
-//       produceId,produceName,harvestDate,bestBefore,farmName,quantity
-//     ).then(message => {
-//         console.log("Message is $$$$",message)
-//         res.status(200).send({message: "Added Product!"})
-//       }
-//     )
-//     .catch(error =>{
-//       console.log("Some error Occured $$$$###", error)
-//       res.status(500).send({error:`Failed to Add`,message:`${error}`})
-//     });
-// });
-
-router.post('/manuread',async function(req,res){
-  const Qvin = req.body.QVinNumb;
-  let ManufacturerClient = new clientApplication();
-  
-  ManufacturerClient.generatedAndEvaluateTxn( 
-    "manufacturer",
+  farmerClient.generatedAndEvaluateTxn( 
+    "farmer",
     "Admin",
-    "autochannel", 
-    "KBA-Automobile",
-    "CarContract",
-    "readCar", Qvin)
-    .then(message => {
-      
-      res.status(200).send({ Cardata : message.toString() });
-    }).catch(error =>{
-     
-      res.status(500).send({error:`Failed to Add`,message:`${error}`})
-    });
+    "agrochannel", 
+    "Chaincode",
+    "ProduceContract",
+    "checkMatchingOrders", productId).then(message => {
+    console.log("Message response",message)
+    var dataBuffer = message.toString();
+    console.log(dataBuffer)
+    var data =[];
+    data.push(dataBuffer,productId)
+    console.log("checkMatchingOrders",data)
+    const value = JSON.parse(dataBuffer)
+    let array = [];
+    if(value.length) {
+        for (i = 0; i < value.length; i++) {
+            array.push({
+               "orderId": `${value[i].Key}`,"productId":`${productId}`,
+                "productName": `${value[i].Record.productName}`, "quantity":`${value[i].Record.quantity}`, 
+                "buyerName": `${value[i].Record.buyerName}`,"assetType": `${value[i].Record.assetType}`
+            })
+        }
+    }
+    console.log("Array value is ", array)
+    console.log("Car id sent",productId)
+    res.render('matchOrder', { itemList: array , title: "Matching Orders"})
+
+  });
 
  })
 
