@@ -11,10 +11,12 @@
         "transactionName": "createOrder",
         "transactionLabel": "A test createOrder transaction",
         "arguments": [
-            "001"
+            "005"
         ],
         "transientData": {
-            "privateValue": "some value"
+            "produceName" : "Apple",
+            "quantity"    : "2Kg",
+            "buyerName"   : "Farhana"
         }
     },
     {
@@ -26,16 +28,6 @@
         "transientData": {}
     },
     {
-        "transactionName": "updateOrder",
-        "transactionLabel": "A test updateOrder transaction",
-        "arguments": [
-            "001"
-        ],
-        "transientData": {
-            "privateValue": "some other value"
-        }
-    },
-    {
         "transactionName": "deleteOrder",
         "transactionLabel": "A test deleteOrder transaction",
         "arguments": [
@@ -44,15 +36,11 @@
         "transientData": {}
     },
     {
-        "transactionName": "verifyOrder",
-        "transactionLabel": "A test verifyOrder transaction",
-        "arguments":[
-            "Org1MSP",
-            "001",
-            {
-                "privateValue": "some other value"
-            }
-        ],
-        "transientData": {}
+      "transactionName": "queryAllOrders",
+      "transactionLabel": "A test queryAllOrders transaction",
+      "arguments": [
+        ""
+      ],
+      "transientData": {}
     }
 ]

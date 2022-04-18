@@ -1,7 +1,7 @@
 [
     {
       "name": "CollectionOrder",
-      "policy": "OR('farmer-auto-com.member', 'buyer-auto-com.member')",
+      "policy": "OR('farmer-agro-com.member', 'buyer-agro-com.member')",
       "requiredPeerCount": 1,
       "maxPeerCount": 1,
       "blockToLive": 1,

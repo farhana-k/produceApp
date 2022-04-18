@@ -11,8 +11,12 @@
         "transactionName": "createProduce",
         "transactionLabel": "A test createProduce transaction",
         "arguments": [
-            "001",
-            "some value"
+            "004",
+            "Tomato",
+            "April2022",
+            "May2022",
+            "Farm1",
+            "3Kg"
         ],
         "transientData": {}
     },
@@ -25,20 +29,17 @@
         "transientData": {}
     },
     {
-        "transactionName": "updateProduce",
-        "transactionLabel": "A test updateProduce transaction",
-        "arguments": [
-            "001",
-            "some other value"
-        ],
-        "transientData": {}
-    },
-    {
         "transactionName": "deleteProduce",
         "transactionLabel": "A test deleteProduce transaction",
         "arguments": [
             "001"
         ],
         "transientData": {}
-    }
+    },
+    {
+        "transactionName": "queryAllProduces",
+        "transactionLabel": "A test queryAllCars transaction",
+        "arguments": [],
+        "transientData": {}
+      }
 ]

@@ -59,16 +59,6 @@ class ProduceContract extends Contract {
         return asset;
     }
 
-    // async updateProduce(ctx, produceId, newValue) {
-    //     const exists = await this.produceExists(ctx, produceId);
-    //     if (!exists) {
-    //         throw new Error(`The produce ${produceId} does not exist`);
-    //     }
-    //     const asset = { value: newValue };
-    //     const buffer = Buffer.from(JSON.stringify(asset));
-    //     await ctx.stub.putState(produceId, buffer);
-        
-    // }
 
     async deleteProduce(ctx, produceId) {
         const mspID = ctx.clientIdentity.getMSPID();
@@ -94,9 +84,9 @@ class ProduceContract extends Contract {
 
         const queryString = {
             selector: {
-                assetType: 'order',
+                assetType  : 'order',
                 produceName: produceDetails.produceName,
-                harvestDate: produceDetails.harvestDate,
+                // harvestDate: produceDetails.harvestDate,
                 quantity: produceDetails.quantity,
             },
         };
@@ -112,14 +102,16 @@ class ProduceContract extends Contract {
 
 
     async matchOrder(ctx, produceId, orderId) {
+        const mspID = ctx.clientIdentity.getMSPID();
+        if (mspID === 'farmer-agro-com') {
+
         const orderContract = new OrderContract();
 
-        const produceDetails = await this.readproduce(ctx, produceId);
-        const orderDetails = await orderContract.readOrder(ctx, orderId);
+        const produceDetails = await this.readProduce(ctx, produceId);
+        const orderDetails   = await orderContract.readOrder(ctx, orderId);
 
         if (
             orderDetails.produceName === produceDetails.produceName &&
-            orderDetails.harvestDate === produceDetails.harvestDate &&
             orderDetails.quantity === produceDetails.quantity
         ) {
             produceDetails.ownedBy = orderDetails.buyerName;
@@ -129,13 +121,17 @@ class ProduceContract extends Contract {
             await ctx.stub.putState(produceId, newproduceBuffer);
 
             await orderContract.deleteOrder(ctx, orderId);
+            await this.deleteProduce(ctx, produceId);
             return `produce ${produceId} is sold to ${orderDetails.buyerName}`;
         } else {
             return 'Order is not matching';
         }
+    } else {
+        return `User under following MSP:${mspID} is unauthorised to perform this action`;
+    }
     }
 
-    async queryAllproduces(ctx) {
+    async queryAllProduces(ctx) {
         const queryString = {
             selector: {
                 assetType: 'produce',

@@ -1,0 +1,118 @@
+
+{{!-- Navigation  --}}
+<head>
+<div class="px-3 py-2 bg-secondary text-white">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <h2 href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+      <svg class="bi d-block mx-auto mb-1 " width="24" height="24"></svg>
+      {{title}}          
+      </h2>
+    <a type="button" class="btn btn-danger filled" data-toggle="modal" data-target="#selectModal" class="nav-link text-white">
+    Login
+    </a>               
+    </div>
+  </div>
+</div>
+</head>
+
+
+{{!-- List of all assets --}}
+
+<div id="selectModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Login as..</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-modal">
+            <div class="container-fluid">
+                <div class="row rowBox" >
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                    <a href="/farmer" class="thumbnail center">
+                        <img src="images/farmer.jpeg" width="100" height="100" alt="...">
+                    </a>
+                    <h5 class="text-center">Farmer</h5>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                    <a href="/buyer" class="thumbnail center">
+                        <img src="images/buyer.jpeg" width="100" height="100" alt="...">
+                    </a>
+                    <h5 class="text-center">Buyer</h5>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                    <a href="/govt" class="thumbnail center">
+                        <img src="images/govt.jpeg" width="100" height="100" alt="...">
+                    </a>
+                    <h5 class="text-center">Government</h5>
+                    </div>                
+                </div>
+            </div>
+            </div>          
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Agricultural Society</h1>
+    <p class="lead"> The Agricultural Society is a group of entities such as <mark>Farmers</mark>, <mark>Buyers</mark> and <mark>Authority</mark> towards a common goal of helping farmers sell their produce, and buyers get farm fresh products directly from local farmers.</p>
+  </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row rowBox" >
+      <div class="card card-shadow">
+        <div class="card-header" style="background-color:rgb(173, 186, 192)">
+            <legend class="text-center">Complete Products List</legend>
+        </div>
+        <div class="card-body" >
+          <div class="table-container">
+              <table class="table" style="width:100%">
+                  <thead id="colored-table">
+                      <th>ProductId</th>
+                      <th>AssetType</th>
+                      <th>Item Name</th>
+                      <th>Harvested On</th>
+                      <th>Best Before</th>
+                      <th>Cultivated By</th>
+                      <th>Quantity</th>
+                      <th>Status</th>
+                      <th> </th>
+                  </thead>
+                  <tbody>
+                      {{#each itemList}}
+                      <tr>
+                          <td>{{this.Key}}</td>
+                          <td>{{this.Record.assetType}}</td>
+                          <td>{{this.Record.produceName}}</td>
+                          <td>{{this.Record.harvestDate}}</td>
+                          <td>{{this.Record.bestBefore}}</td>
+                          <td>{{this.Record.farmName}}</td>
+                          <td>{{this.Record.quantity}}</td>
+                          <td>{{this.Record.status}}</td>
+                          {{!-- <td><button class="btn btn-danger filled" onClick="getItemHistory('{{this.Key}}');">Get history</button></td> --}}
+                      </tr>
+                      {{/each}}
+                  </tbody>
+              </table>
+          </div>
+        </div>    
+      </div>
+  </div>
+</div>
+<script type="text/javascript" src='/javascripts/main.js'></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
