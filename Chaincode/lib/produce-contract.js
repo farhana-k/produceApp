@@ -36,7 +36,7 @@ class ProduceContract extends Contract {
                 quantity,
                 status: 'In Farm',
                 ownedBy: farmName,                
-                assetType: 'produce',
+                assetType: 'product',
             };
             const buffer = Buffer.from(JSON.stringify(produceAsset));
             await ctx.stub.putState(produceId, buffer);
@@ -134,7 +134,7 @@ class ProduceContract extends Contract {
     async queryAllProduces(ctx) {
         const queryString = {
             selector: {
-                assetType: 'produce',
+                assetType: 'product',
             },
             sort: [{ harvestDate: 'asc' }],
         };

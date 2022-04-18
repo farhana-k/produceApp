@@ -47,7 +47,15 @@ class clientApplication{
     }
 // To read data from network
 
-    async generatedAndEvaluateTxn(role,IdentityLabel,channelName,chaincodeName,contractName,txnName,...args){
+    async generatedAndEvaluateTxn(
+        role,
+        IdentityLabel,
+        channelName,
+        chaincodeName,
+        contractName,
+        txnName,
+        ...args
+        ){
         let gateway = new Gateway()
         try {
         

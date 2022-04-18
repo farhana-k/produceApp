@@ -1,0 +1,179 @@
+<head>
+<div class="px-3 py-2 bg-secondary text-white">
+    <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <h2 href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+        <svg class="bi d-block mx-auto mb-1 " width="24" height="24"></svg>
+        {{title}}          
+        </h2>
+    {{!-- <a type="button" class="btn btn-success filled " onClick="getEvent()" class="nav-link text-white">
+    Notifications
+    </a>         --}}
+    <a type="button" class="btn btn-danger filled marginLeft " href="/" class="nav-link text-white">
+    Logout
+    </a>
+                
+    </div>
+    </div>
+</div> 
+</head>
+</br>
+<div class="jumbotron jumbotronManufacturer jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Farmers Dashboard</h1>
+    <p class="lead"> 
+    Farmers are the backbone of the nation. 
+    <mark>Farmers</mark> play a major role in the economy of a country.</p>
+  </div>
+</div>
+</br>
+<div class="container-fluid">
+    <div class="row rowBox" >
+        <div class="col-md-3 col-sm-12"></div>
+
+        <div class="col-md-6 col-sm-12">
+
+            <div class="card card-shadow">
+                <div class="card-header" style="background-color:tomato">
+                    <legend class="text-center" data-bs-toggle="collapse" href="#collapseQueryAdd" role="button" aria-expanded="false" aria-controls="collapseExample">Add a new Product</legend>
+                </div>
+                <div class="form-modal">
+                <div class="card-body collapse" id="collapseQueryAdd">
+                    <form id="manForm">
+                        <div class="row" >
+                            <div class="col-md-12 col-sm-12" class="form-group">
+                            <a>Product id</a>
+                            <label for="produceId" class="form-label mt-4"></label>
+                            <input type="text" class="form-control" id="produceId" aria-describedby="vinNumber" placeholder="001">
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-12 col-sm-12" class="form-group">
+                            <a>Product Name</a>
+                            <label for="produceName" class="form-label mt-4"></label>
+                            <input type="text" class="form-control" id="produceName" aria-describedby="carMake" placeholder="Tomato">
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-12 col-sm-12" class="form-group">
+                            <a>Date Harvested</a>
+                            <label for="harvestDate" class="form-label mt-4"></label>
+                            <input type="date" class="form-control" onfocus="(this.type='date')"  id="harvestDate" aria-describedby="carModel" placeholder="10/04/2022">
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-12 col-sm-12" class="form-group">
+                            <a>Expiry Date</a>
+                            <label for="bestBefore" class="form-label mt-4"></label>
+                            <input type="date" class="form-control" onfocus="(this.type='date')"  id="bestBefore" aria-describedby="carColour" placeholder="10/05/2022">
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-12 col-sm-12" class="form-group">
+                            <a>Farm Name</a>
+                            <label for="farmName" class="form-label mt-4"></label>
+                            <input type="text" class="form-control" id="farmName" aria-describedby="dom" placeholder="Farm 1">
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-12 col-sm-12" class="form-group">
+                            <a>Quantity</a>
+                            <label for="quantity" class="form-label mt-4"></label>
+                            <input type="text" class="form-control" id="quantity" aria-describedby="quantity" placeholder="5 Kg">
+                            </div>
+                        </div>      
+                        </br>
+                        <div class="row" >
+                            <div class="col-md-12 col-sm-12" >
+                                <button type="button" onclick="FarmerWriteData(event)" class="btn btn-secondary rounded-pill">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12"> 
+        </div>
+
+    </div>
+</div>
+</br>
+<div class="container-fluid">
+    <div class="row rowBox" >
+        <div class="col-md-3 col-sm-12"></div>
+        <div class="col-md-6 col-sm-12">
+            <div class="card card-shadow">
+                <div class="card-header" style="background-color:tomato">
+                    <legend class="text-center" data-bs-toggle="collapse" href="#collapseQueryRead" role="button" aria-expanded="false" aria-controls="collapseExample">Get Details of a Product</legend>
+                </div>
+                <div class="card-body collapse"  id="collapseQueryRead">
+                    <form>
+                        <div class="row .navbar-brand" >
+                            <div class="col-md-12 col-sm-12" class="form-group">
+                            <a>Product ID</a>
+                            <label for="productId" class="form-label mt-4"></label>
+                            <input type="text" class="form-control" id="productId" aria-describedby="QueryVinNumbMan" placeholder="001">
+                            </div>
+                        </div>
+                        </br>
+                        <button type="submit" onclick="FarmQueryData(event)" class="btn btn-fill btn-secondary rounded-pill">Submit</button></br>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12"></div>
+    </div>
+</div>
+</br>
+
+<div class="container-fluid">
+    <div class="row rowBox" >
+        <div class="col-md-3 col-sm-12"></div>
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-header" style="background-color:tomato">
+                    <legend class="text-center" >Products Available</legend>
+                </div>
+                <div class="card-body">
+                   <div class="table-container">
+      <table class="table" style="width:100%">
+          <thead id="colored-table">
+              <th>Product Id</th>
+              <th>Product Name</th>
+              <th>Date Harvested</th>
+              <th>Expiry Date</th>
+              <th>Owned By</th>
+              <th>Quantity</th>
+              <th> </th>
+          </thead>
+          <tbody>
+              {{#each itemList}}
+              {{#ifequals this.Record.status "In Factory"}}
+              <tr>
+                  <td>{{this.Key}}</td>
+                  <td>{{this.Record.productName}}</td>
+                  <td>{{this.Record.harvestDate}}</td>
+                  <td>{{this.Record.bestBefore}}</td>
+                  <td>{{this.Record.farmName}}</td>
+                  <td>{{this.Record.quantity}}</td>
+                  <td><button class="btn btn-success filled" onClick="getMatchingOrders('{{this.Key}}');">Check for orders</button></td>
+
+              </tr>
+              {{/ifequals}}
+              {{/each}}
+          </tbody>
+      </table>
+  </div> 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12"></div>
+
+    </div>
+</div>
+</br>
+
+<script type="text/javascript" src='/javascripts/main.js'></script>
+

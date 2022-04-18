@@ -33,24 +33,24 @@
             <div class="container-fluid">
                 <div class="row rowBox" >
                 <div class="row">
-                    <div class="col-xs-12 col-md-4">
+                    <div class="col-xs-12 col-md-6">
                     <a href="/farmer" class="thumbnail center">
-                        <img src="images/farmer.jpeg" width="100" height="100" alt="...">
+                        <img src="images/farmer.jpeg" width="150" height="100" alt="...">
                     </a>
                     <h5 class="text-center">Farmer</h5>
                     </div>
-                    <div class="col-xs-12 col-md-4">
+                    <div class="col-xs-12 col-md-6">
                     <a href="/buyer" class="thumbnail center">
-                        <img src="images/buyer.jpeg" width="100" height="100" alt="...">
+                        <img src="images/buyer.png" width="150" height="100" alt="...">
                     </a>
                     <h5 class="text-center">Buyer</h5>
                     </div>
-                    <div class="col-xs-12 col-md-4">
+                    {{!-- <div class="col-xs-12 col-md-4">
                     <a href="/govt" class="thumbnail center">
                         <img src="images/govt.jpeg" width="100" height="100" alt="...">
                     </a>
                     <h5 class="text-center">Government</h5>
-                    </div>                
+                    </div>                 --}}
                 </div>
             </div>
             </div>          
@@ -67,7 +67,7 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">Agricultural Society</h1>
-    <p class="lead"> The Agricultural Society is a group of entities such as <mark>Farmers</mark>, <mark>Buyers</mark> and <mark>Authority</mark> towards a common goal of helping farmers sell their produce, and buyers get farm fresh products directly from local farmers.</p>
+    <p class="lead"> The Agricultural Society is a group of which connects <mark>Farmers</mark> and <mark>Buyers</mark> with a common goal of helping farmers sell their products, and buyers get farm fresh products directly from local farmers.</p>
   </div>
 </div>
 
@@ -99,7 +99,7 @@
                           <td>{{this.Record.produceName}}</td>
                           <td>{{this.Record.harvestDate}}</td>
                           <td>{{this.Record.bestBefore}}</td>
-                          <td>{{this.Record.farmName}}</td>
+                          <td>{{this.Record.ownedBy}}</td>
                           <td>{{this.Record.quantity}}</td>
                           <td>{{this.Record.status}}</td>
                           {{!-- <td><button class="btn btn-danger filled" onClick="getItemHistory('{{this.Key}}');">Get history</button></td> --}}

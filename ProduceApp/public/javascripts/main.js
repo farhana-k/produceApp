@@ -1,23 +1,25 @@
 
-function toManuDash() {
-    window.location.href='/manufacturer';
-}
+// function toManuDash() {
+//     window.location.href='/manufacturer';
+// }
 
 function swalBasic(data) {
-    swal.fire({
+    // swal.fire({
+        swal({
         // toast: true,
         icon: `${data.icon}`,
         title: `${data.title}`,
-        animation: true,
-        position: 'center',
-        showConfirmButton: true,
-        footer: `${data.footer}`,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', swal.stopTimer)
-            toast.addEventListener('mouseleave', swal.resumeTimer)
-        }
+        type : "Success"
+        // animation: true,
+        // position: 'center',
+        // showConfirmButton: true,
+        // footer: `${data.footer}`,
+        // timer: 3000,
+        // timerProgressBar: true,
+        // didOpen: (toast) => {
+        //     toast.addEventListener('mouseenter', swal.stopTimer)
+        //     toast.addEventListener('mouseleave', swal.resumeTimer)
+        // }
     })
 }
 
@@ -43,44 +45,45 @@ function reloadWindow() {
     window.location.reload();
 }
 
-function ManWriteData(){
+function FarmerWriteData(){
     event.preventDefault();
-    const vin = document.getElementById('vinNumber').value;
-    const make = document.getElementById('carMake').value;
-    const model = document.getElementById('carModel').value;
-    const color = document.getElementById('carColour').value;
-    const dom = document.getElementById('dom').value;
-    const flag = document.getElementById('manName').value;
-    console.log(vin+make+model+color+dom+flag);
+    const produceId = document.getElementById('produceId').value;
+    const produceName = document.getElementById('produceName').value;
+    const harvestDate = document.getElementById('harvestDate').value;
+    const bestBefore = document.getElementById('bestBefore').value;
+    const farmName = document.getElementById('farmName').value;
+    const quantity = document.getElementById('quantity').value;
+    
+    // console.log(vin+make+model+color+dom+flag);
 
-    if (vin.length==0||make.length==0||model.length==0||color.length==0||dom.length==0||flag.length==0) {
+    if (produceId.length==0||produceName.length==0||harvestDate.length==0||bestBefore.length==0||farmName.length==0||quantity.length==0) {
         const data = {
             title: "You might have missed something",
-            footer: "Enter all mandatory fields to add a new car",
+            footer: "Enter all mandatory fields!",
             icon: "warning"
         }
         swalBasic(data);
         }
     else{
-        fetch('/manuwrite',{
+        fetch('/farmerwrite',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',              
             },
-            body: JSON.stringify({VinNumb: vin, CarMake: make, CarModel: model, CarColor: color, DOM: dom, CarFlag: flag})
+            body: JSON.stringify({ProductId : produceId, ProductName : produceName, HarvestDate: harvestDate, BestBefore: bestBefore, Owner: farmName, Quantity: quantity})
         })
         .then(function(response){
             if(response.status == 200) {
                 const data = {
                     title: "Success",
-                    footer: "Added a new car",
+                    footer: "Added a new product",
                     icon: "success"
                 }
                 swalBasic(data);
             } else {
                 const data = {
-                    title: `Car with Vin Number ${vin} already exists`,
-                    footer: "Vin Number must be unique",
+                    title: `Product with ID ${produceId} already exists`,
+                    footer: "Product ID must be unique",
                     icon: "error"
                 }
                 swalBasic(data);
@@ -97,39 +100,41 @@ function ManWriteData(){
         })    
     }
 }
-function ManQueryData(){
+
+
+function FarmQueryData(){
 
     event.preventDefault();
-    const Qvin = document.getElementById('QueryVinNumbMan').value;
+    const Id = document.getElementById('productId').value;
     
-    console.log(Qvin);
+    // console.log(Id);
 
-    if (Qvin.length==0) {
+    if (Id.length==0) {
         const data = {
-            title: "Enter a Valid Qvin Number",
+            title: "Enter a Valid product Id",
             footer: "This is a mandatory field",
             icon: "warning"
         }
         swalBasic(data)  
     }
     else{
-        fetch('/manuread',{
+        fetch('/farmread',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',              
             },
-            body: JSON.stringify({QVinNumb: Qvin})
+            body: JSON.stringify({Id: Id})
         })
         .then(function(response){
             console.log(response);
             return response.json();
         })
-        .then(function (Cardata){
-            dataBuf = Cardata["Cardata"]
+        .then(function (ProductData){
+            dataBuf = ProductData["ProductData"]
             swal.fire({
                 // toast: true,
                 icon: `success`,
-                title: `Current status of car with Qvin ${Qvin} :`,
+                title: `Product Details ${Id} :`,
                 animation: false,
                 position: 'center',
                 html: `<h3>${dataBuf}</h3>`,

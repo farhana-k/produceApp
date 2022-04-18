@@ -1,30 +1,28 @@
 var express = require('express');
 var router = express.Router();
 const {clientApplication} = require('./client');
-//const {Events} = require('./events')
-//let eventClient = new Events()
-//eventClient.contractEventListner("manufacturer", "Admin", "autochannel",
-//"KBA-Automobile", "CarContract", "addCarEvent")
-
-
+const {Events} = require('./events')
+let eventClient = new Events()
+eventClient.contractEventListner("farmer", "Admin", "agrochannel",
+"Chaincode", "ProduceContract", "addProduceEvent")
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  let govtClient = new clientApplication();
+  farmerClient = new clientApplication();
  
-  govtClient.generatedAndEvaluateTxn(
-      "govt",
+  farmerClient.generatedAndEvaluateTxn(
+      "farmer",
       "Admin",
       "agrochannel", 
       "Chaincode",
       "ProduceContract",
-      "queryAllProduce"
+      "queryAllProduces"
   )
   .then(produces => {
     const dataBuffer = produces.toString();
-    console.log("produces are ", produces.toString())
+    // console.log("produces are ", produces.toString())
     const value = JSON.parse(dataBuffer)
-    console.log("History DataBuffer is",value)
+    // console.log("History DataBuffer is",value)
     res.render('index', { title: 'Agricultural Consortium', itemList: value});
   }).catch(err => {
     res.render("error", {
@@ -32,6 +30,20 @@ router.get('/', function(req, res, next) {
       callingScreen: "error",
     })
   })
+});
+
+router.get('/event', function(req, res, next) {
+  console.log("Event Response %%%$$^^$%%$",eventClient.getEvents().toString())
+  var event = eventClient.getEvents().toString()
+  res.send({carEvent: event})
+  // .then(array => {
+  //   console.log("Value is #####", array)
+  //   res.send(array);
+  // }).catch(err => {
+  //   console.log("errors are ", err)
+  //   res.send(err)
+  // })
+  // res.render('index', { title: 'Dealer Dashboard' });
 });
 
 router.get('/farmer', function(req, res, next) {
@@ -43,7 +55,7 @@ router.get('/farmer', function(req, res, next) {
       "agrochannel", 
       "Chaincode",
       "ProduceContract",
-      "queryAllProduce"
+      "queryAllProduces"
   )
   .then(produces => {
     const dataBuffer = produces.toString();
@@ -65,12 +77,12 @@ router.get('/buyer', function(req, res, next) {
 
 router.post('/farmerwrite',function(req,res){
 
-  const vin = req.body.VinNumb;
-  const produceName = req.body.ProduceName;
-  const harvestDate = req.body.ProduceHarvestDate;
-  const bestBefore = req.body.ProduceBestBefore;
+  const produceId = req.body.ProductId;
+  const produceName = req.body.ProductName;
+  const harvestDate = req.body.HarvestDate;
+  const bestBefore = req.body.BestBefore;
+  const farmName = req.body.Owner;
   const quantity = req.body.Quantity;
-  const flag = req.body.ProduceFlag;
 
   // console.log("Request Object",req)
   let FarmerClient = new clientApplication();
@@ -82,7 +94,7 @@ router.post('/farmerwrite',function(req,res){
       "Chaincode",
       "ProduceContract",
       "createProduce",
-      vin,produceName,harvestDate,bestBefore,quantity,flag
+      produceId,produceName,harvestDate,bestBefore,farmName,quantity
     ).then(message => {
         console.log("Message is $$$$",message)
         res.status(200).send({message: "Added Product"})
@@ -94,8 +106,8 @@ router.post('/farmerwrite',function(req,res){
     });
 });
 
-router.post('/farmerread',async function(req,res){
-  const Qvin = req.body.QVinNumb;
+router.post('/farmread',async function(req,res){
+  const Id = req.body.Id;
   let FarmerClient = new clientApplication();
   
   FarmerClient.generatedAndEvaluateTxn( 
@@ -104,7 +116,7 @@ router.post('/farmerread',async function(req,res){
     "agrochannel", 
     "Chaincode",
     "ProduceContract",
-    "readProduce", Qvin)
+    "readProduce", Id)
     .then(message => {
       
       res.status(200).send({ Producedata : message.toString() });
@@ -114,28 +126,7 @@ router.post('/farmerread',async function(req,res){
     });
 
  })
-
-  //  Get History of a product
- router.get('/itemhistory',async function(req,res){
-  const produceId = req.query.produceId;
  
-  let buyerClient = new clientApplication();
-  
-  buyerClient.generatedAndEvaluateTxn( 
-    "buyer",
-    "Admin",
-    "agroochannel", 
-    "Chaincode",
-    "ProduceContract",
-    "getProducesHistory", produceId).then(message => {
-    const dataBuffer = message.toString();
-    
-    const value = JSON.parse(dataBuffer)
-    res.render('history', { itemList: value , title: "Product History"})
-
-  });
-
- })
 
 // Create order
 router.post('/createOrder',async function(req,res){
@@ -172,6 +163,69 @@ router.post('/createOrder',async function(req,res){
 
  })
 
+
+
+ router.get('/addCarEvent', async function(req, res, next) {
+  let mvdClient = new clientApplication();
+  const result = await mvdClient.contractEventListner("manufacturer", "Admin", "autochannel", 
+  "KBA-Automobile", "addCarEvent")
+  console.log("The result is ####$$$$",result)
+  res.render('manufacturer', {view: "carEvents", results: result })
+})
+
+// router.post('/farmerwrite',function(req,res){
+
+//   const produceId = req.body.produceId;
+//   const produceName = req.body.produceName;
+//   const harvestDate = req.body.harvestDate;
+//   const bestBefore = req.body.bestBefore;
+//   const farmName = req.body.farmName;
+//   const quantity = req.body.quantity;
+
+//   // console.log("Request Object",req)
+//   let FarmerClient = new clientApplication();
+  
+//   FarmerClient.generatedAndSubmitTxn(
+//       "farmer",
+//       "Admin",
+//       "agrochannel", 
+//       "Chaincode",
+//       "ProduceContract",
+//       "createProduce",
+//       produceId,produceName,harvestDate,bestBefore,farmName,quantity
+//     ).then(message => {
+//         console.log("Message is $$$$",message)
+//         res.status(200).send({message: "Added Product!"})
+//       }
+//     )
+//     .catch(error =>{
+//       console.log("Some error Occured $$$$###", error)
+//       res.status(500).send({error:`Failed to Add`,message:`${error}`})
+//     });
+// });
+
+router.post('/manuread',async function(req,res){
+  const Qvin = req.body.QVinNumb;
+  let ManufacturerClient = new clientApplication();
+  
+  ManufacturerClient.generatedAndEvaluateTxn( 
+    "manufacturer",
+    "Admin",
+    "autochannel", 
+    "KBA-Automobile",
+    "CarContract",
+    "readCar", Qvin)
+    .then(message => {
+      
+      res.status(200).send({ Cardata : message.toString() });
+    }).catch(error =>{
+     
+      res.status(500).send({error:`Failed to Add`,message:`${error}`})
+    });
+
+ })
+
+
  router.post('/readOrder',async function(req,res){
   const orderNumber = req.body.orderNumber;
   let BuyerClient = new clientApplication();
@@ -194,7 +248,7 @@ router.post('/createOrder',async function(req,res){
  router.get('/allOrders',async function(req,res){
   let BuyerClient = new clientApplication();
   BuyerClient.generatedAndEvaluateTxn( 
-    "buyer",
+    "farmer",
     "Admin",
     "agrochannel", 
     "Chaincode",
