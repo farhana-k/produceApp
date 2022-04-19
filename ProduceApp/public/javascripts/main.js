@@ -1,8 +1,3 @@
-
-// function toManuDash() {
-//     window.location.href='/manufacturer';
-// }
-
 function swalBasic(data) {
     swal.fire({
         // toast: true,
@@ -20,24 +15,6 @@ function swalBasic(data) {
         }
     })
 }
-
-// function swalDisplay(data) {
-//     swal.fire({
-//         // toast: true,
-//         icon: `${data.icon}`,
-//         title: `${data.title}`,
-//         animation: false,
-//         position: 'center',
-//         html: `<h3>${JSON.stringify(data.response)}</h3>`,
-//         showConfirmButton: true,
-//         timer: 3000,
-//         timerProgressBar: true,
-//         didOpen: (toast) => {
-//             toast.addEventListener('mouseenter', swal.stopTimer)
-//             toast.addEventListener('mouseleave', swal.resumeTimer)
-//         }
-//     }) 
-// }
 
 function reloadWindow() {
     window.location.reload();
@@ -78,6 +55,8 @@ function FarmerWriteData(){
                     icon: "success"
                 }
                 swalBasic(data);
+                // window.location.href = '/farmer'
+                location.reload(); 
             } else {
                 const data = {
                     title: `Product with ID ${produceId} already exists`,
@@ -158,33 +137,21 @@ function FarmQueryData(){
     }
 }
 
-// //Method to get the history of an item
-// function getItemHistory(carId) {
-//     console.log("postalId", carId)
-//     window.location.href = '/itemhistory?carId=' + carId;
-// }
-
 function getMatchingOrders(productId) {
     // console.log("productId",productId)
     window.location.href = 'matchOrder?productId=' + productId;
 }
 
-function allorders(){
-    
-}
-
 function createOrder() {
-    console.log("Entered the order function")
+    // alert("Entered the order function")
     event.preventDefault();
     const orderNumber = document.getElementById('orderNumber').value;
-    const carMake = document.getElementById('carMake').value;
-    const carModel = document.getElementById('carModel').value;
-    const carColour = document.getElementById('carColour').value;
-    const dealerName = document.getElementById('dealerName').value;
-    console.log(orderNumber + carColour + dealerName);
+    const produceName = document.getElementById('product').value;
+    const quantity = document.getElementById('quantity').value;
+    const buyerName = document.getElementById('buyerName').value;
 
-    if (orderNumber.length == 0 || carMake.length == 0 || carModel.length == 0 
-        || carColour.length == 0|| dealerName.length == 0) {
+    if (orderNumber.length == 0 || produceName.length == 0 || quantity.length == 0 
+        || buyerName.length == 0) {
             const data = {
                 title: "You have missed something",
                 footer: "All fields are mandatory",
@@ -198,7 +165,7 @@ function createOrder() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ orderNumber: orderNumber, carMake: carMake, carModel: carModel, carColour: carColour,dealerName: dealerName })
+            body: JSON.stringify({ orderNumber: orderNumber, produceName: produceName, quantity: quantity,buyerName: buyerName })
         })
             .then(function (response) {
                 if (response.status === 200) {
@@ -208,6 +175,8 @@ function createOrder() {
                         icon: "success"
                     }
                     swalBasic(data)
+                    location.reload(); 
+                    // window.location.href = '/farmer'
 
                 } else {
                     const data = {
@@ -229,7 +198,7 @@ function createOrder() {
 }
 
 function readOrder() {
-    console.log("Entered the order function")
+    // alert("Entered the order function")
     event.preventDefault();
     const orderNumber = document.getElementById('ordNum').value;
     
@@ -283,6 +252,52 @@ function readOrder() {
     }
 }
 
+function deleteOrder(orderNumber){
+    if ( !orderNumber) {
+        const data = {
+            title: "Select an order to delete",
+            footer: "Order number is mandatory",
+            icon: "warning"
+        }
+        swalBasic(data)   
+    } else {
+        fetch('/deleteOrder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ orderNumber : orderNumber})
+        })
+            .then(function (response) {
+                if (response.status === 200) {
+                    const data = {
+                        title: `Order Deleted successfully!!`,
+                        footer: "Success",
+                        icon: "success"
+                    }
+                    swalBasic(data)
+                    location.reload(); 
+                } else {
+                    const data = {
+                        title: `Failed to delete Order!!`,
+                        footer: "Please try again !!",
+                        icon: "error"
+                    }
+                    swalBasic(data)                 }
+            })
+            
+            .catch(function (err) {
+                const data = {
+                    title: "Error in processing Request",
+                    footer: "Something went wrong !",
+                    icon: "error"
+                }
+                swalBasic(data);  
+            })
+    }
+}
+
+
 function matchOrder(orderId,productId) {
     if (!orderId || !productId) {
         const data = {
@@ -333,6 +348,50 @@ function allOrders() {
     window.location.href='/allOrders';
 }
 
+function DeleteItem(productId){
+    if ( !productId) {
+        const data = {
+            title: "Select a product to delete",
+            footer: "Product Id is mandatory",
+            icon: "warning"
+        }
+        swalBasic(data)   
+    } else {
+        fetch('/deleteItem', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ productId})
+        })
+            .then(function (response) {
+                if (response.status === 200) {
+                    const data = {
+                        title: `Item Deleted successfully`,
+                        footer: "Success",
+                        icon: "success"
+                    }
+                    swalBasic(data)
+                    location.reload(); 
+                } else {
+                    const data = {
+                        title: `Failed to delete product!!`,
+                        footer: "Please try again !!",
+                        icon: "error"
+                    }
+                    swalBasic(data)                 }
+            })
+            
+            .catch(function (err) {
+                const data = {
+                    title: "Error in processing Request",
+                    footer: "Something went wrong !",
+                    icon: "error"
+                }
+                swalBasic(data);  
+            })
+    }
+}
 
 function getEvent() {
     fetch('/event', {

@@ -76,7 +76,7 @@
               <table class="table" style="width:100%">
                   <thead id="colored-table">
                       <th>ProductId</th>
-                      <th>AssetType</th>
+                      {{!-- <th>AssetType</th> --}}
                       <th>Product</th>
                       <th>Harvested On</th>
                       <th>Best Before</th>
@@ -89,13 +89,14 @@
                       {{#each itemList}}
                       <tr>
                           <td>{{this.Key}}</td>
-                          <td>{{this.Record.assetType}}</td>
+                          {{!-- <td>{{this.Record.assetType}}</td> --}}
                           <td>{{this.Record.produceName}}</td>
                           <td>{{this.Record.harvestDate}}</td>
                           <td>{{this.Record.bestBefore}}</td>
                           <td>{{this.Record.ownedBy}}</td>
                           <td>{{this.Record.quantity}}</td>
-                          <td>{{this.Record.status}}</td>
+                          {{!-- <td>{{this.Record.status}}</td> --}}
+                          <td><button class="btn btn-success filled" >Available</button></td>
                           {{!-- <td><button class="btn btn-danger filled" onClick="getItemHistory('{{this.Key}}');">Get history</button></td> --}}
                       </tr>
                       {{/each}}

@@ -14,12 +14,12 @@
 <br/>
 <div class="jumbotron jumbotronDealer jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4">Dealer Dashboard</h1>
-    <p class="lead"> Dealers sell and service manufactured products. <mark>Dealers</mark> perform the initial sales process as well as deliver after-sales services.</p>
+    <h1 class="display-4">Buyer Dashboard</h1>
+    {{!-- <p class="lead"> Dealers sell and service manufactured products. <mark>Dealers</mark> perform the initial sales process as well as deliver after-sales services.</p> --}}
   </div>
 </div>
 </br>
-<div class="container-fluid">
+{{!-- <div class="container-fluid">
     <div class="row rowBox" >
         <div class="col-md-5 col-sm-12"></div>
         <div class="col-md-4 col-sm-12">
@@ -29,7 +29,7 @@
         </div>
 
     </div>
-</div>        
+</div>         --}}
 <div class="container-fluid">
     <div class="row rowBox" >
         <div class="col-md-3 col-sm-12"></div>
@@ -44,37 +44,30 @@
                             <div class="col-md-12 col-sm-12" class="form-group">
                             <a>Order Number</a>
                             <label for="orderNumber" class="form-label mt-4"></label>
-                            <input type="text" class="form-control" id="orderNumber" aria-describedby="orderNumber" placeholder="A71">
+                            <input type="text" class="form-control" id="orderNumber" aria-describedby="orderNumber" placeholder="123">
                             </div>
                         </div>
                         <div class="row" >
                             <div class="col-md-12 col-sm-12" class="form-group">
-                            <a>Car Make</a>
-                            <label for="carMake" class="form-label mt-4"></label>
-                            <input type="text" class="form-control" id="carMake" aria-describedby="carMake" placeholder="Tata">
+                            <a>Product</a>
+                            <label for="product" class="form-label mt-4"></label>
+                            <input type="text" class="form-control" id="product" aria-describedby="carMake" placeholder="Onion">
                             </div>
                         </div>
                         <div class="row" >
                             <div class="col-md-12 col-sm-12" class="form-group">
-                            <a>Car model</a>
-                            <label for="carModel" class="form-label mt-4"></label>
-                            <input type="text" class="form-control" id="carModel" aria-describedby="carModel" placeholder="Tiago">
+                            <a>Quantity</a>
+                            <label for="quantity" class="form-label mt-4"></label>
+                            <input type="text" class="form-control" id="quantity" aria-describedby="carModel" placeholder="5 kg">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 col-sm-12" class="form-group">
-                            <a>Car Colour</a>
-                            <label for="carColour" class="form-label mt-4"></label>
-                            <input type="text" class="form-control" id="carColour" aria-describedby="carColour" placeholder="Black">
+                            <a>Buyer Name</a>
+                            <label for="buyerName" class="form-label mt-4"></label>
+                            <input type="text" class="form-control" id="buyerName" aria-describedby="carColour" placeholder="Farhana">
                             </div>
                         </div>
-                      <div class="row" >
-                            <div class="col-md-12 col-sm-12" class="form-group">
-                            <a>Dealer Name</a>
-                            <label for="dealerName" class="form-label mt-4"></label>
-                            <input type="text" class="form-control" id="dealerName" aria-describedby="dealerName" placeholder=" Pride Motors">
-                            </div>
-                        </div>      
                         </br>
                         <div class="row" >
                             <div class="col-md-12 col-sm-12" class="form-group">
@@ -102,7 +95,7 @@
                             <div class="col-md-12 col-sm-12" class="form-group">
                             <a>Order Number</a>
                             <label for="ordNum" class="form-label mt-4"></label>
-                            <input type="text" class="form-control" id="ordNum" aria-describedby="ordNum" placeholder="A71">
+                            <input type="text" class="form-control" id="ordNum" aria-describedby="ordNum" placeholder="123">
                             </div>
                         </div>
                         </br>
@@ -114,6 +107,55 @@
         <div class="col-md-3 col-sm-12"></div>
     </div>
 </div>
+
+
+
+<div class="container-fluid">
+    <div class="row rowBox" >
+        <div class="col-md-3 col-sm-12"></div>
+        {{!-- <div class="col-md-6 col-sm-12"> --}}
+            <div class="card">
+                <div class="card-header" style="background-color:tomato">
+                    <legend class="text-center" >Products Available</legend>
+                </div>
+                <div class="card-body">
+                   <div class="table-container">
+      <table class="table" style="width:100%">
+          <thead id="colored-table">
+              <th>Product Id</th>
+              <th>Product</th>
+              <th>Date Harvested</th>
+              <th>Expiry Date</th>
+              <th>Owned By</th>
+              <th>Quantity</th>
+              <th> </th>
+          </thead>
+          <tbody>
+              {{#each itemList}}
+              {{!-- {{#ifequals this.Record.status "In Farm"}} --}}
+              <tr>
+                  <td>{{this.Key}}</td>
+                  <td>{{this.Record.produceName}}</td>
+                  <td>{{this.Record.harvestDate}}</td>
+                  <td>{{this.Record.bestBefore}}</td>
+                  <td>{{this.Record.ownedBy}}</td>
+                  <td>{{this.Record.quantity}}</td>
+                  {{!-- <td><button class="btn btn-danger filled" onClick="DeleteItem('{{this.Key}}');">Delete Product</button></td> --}}
+
+              </tr>
+              {{!-- {{/ifequals}} --}}
+              {{/each}}
+          </tbody>
+      </table>
+  </div> 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12"></div>
+
+    </div>
+</div>
+</br>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script type="text/javascript" src='/javascripts/main.js'></script>

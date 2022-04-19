@@ -6,8 +6,8 @@
             <svg class="bi d-block mx-auto mb-1 " width="24" height="24"></svg>
             {{title}}          
             </h2>
-        <a type="button" href="/farmer" class="btn btn-danger nav-link text-white filled">
-        Back to Farmer Dashboard
+        <a type="button" href="/farmer" class="btn btn-success nav-link text-white filled">
+        Back to Dashboard
         </a>
         <a type="button" href="/" class="btn btn-danger filled marginLeft" class="nav-link text-white">
         Logout
@@ -44,7 +44,8 @@
                             <td>{{this.buyerName}}</td>
                             <td>{{this.assetType}}</td>
                             {{!-- <td>{{this.assetType}}</td> --}}
-                            <td><button class="btn btn-info filled" onClick="matchOrder('{{this.orderId}}','{{this.productId}}');">Match Order</button></td>
+                            <td><button class="btn btn-success filled" onClick="matchOrder('{{this.orderId}}','{{this.productId}}');">Match Order</button></td>
+                            <td><button class="btn btn-danger filled" onClick="deleteOrder('{{this.orderId}}');">Delete Order</button></td>
 
                         </tr>
                         {{/each}}

@@ -6,9 +6,9 @@
         <svg class="bi d-block mx-auto mb-1 " width="24" height="24"></svg>
         {{title}}          
         </h2>
-    {{!-- <a type="button" class="btn btn-success filled " onClick="getEvent()" class="nav-link text-white">
-    Notifications
-    </a>         --}}
+    <a type="button" class="btn btn-success filled " onClick="allOrders()" class="nav-link text-white">
+    All Orders
+    </a>        
     <a type="button" class="btn btn-danger filled marginLeft " href="/" class="nav-link text-white">
     Logout
     </a>
@@ -101,62 +101,19 @@
 </div>
 </br>
 
-<div class="container-fluid">
-    <div class="row rowBox" >
-        <div class="col-md-3 col-sm-12"></div>
-        <div class="col-md-6 col-sm-12">
-            <div class="card card-shadow">
-                <button class="btn " onClick="allOrders();" style="background-color:tomato" , "fontcolor":"Black">All Orders</button>
-                {{!-- <div class="card-header" style="background-color:tomato">
-                    <legend class="text-center"  href="#collapseQueryRead" role="button" aria-expanded="false" aria-controls="collapseExample">View All Orders</legend>
-                </div> --}}
-                {{!-- <div class="card-body collapse"  id="collapseQueryRead">
-                    <form>
-                        <div class="row .navbar-brand" >
-                            <div class="col-md-12 col-sm-12" class="form-group">
-                            <a>Product ID</a>
-                            <label for="productId" class="form-label mt-4"></label>
-                            <input type="text" class="form-control" id="productId" aria-describedby="QueryVinNumbMan" placeholder="001">
-                            </div>
-                        </div>
-                        </br>
-                        <button type="submit" onclick="FarmQueryData(event)" class="btn btn-fill btn-secondary rounded-pill">Submit</button></br>
-                    </form>
-                </div> --}}
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-12"></div>
-    </div>
-</div>
-</br>
 
-<div class="container-fluid">
+{{!-- <div class="container-fluid">
     <div class="row rowBox" >
-        <div class="col-md-3 col-sm-12"></div>
-        <div class="col-md-6 col-sm-12">
-            <div class="card card-shadow">
-                <div class="card-header" style="background-color:tomato">
-                    <legend class="text-center" data-bs-toggle="collapse" href="#collapseQueryRead" role="button" aria-expanded="false" aria-controls="collapseExample">Get Details of a Product</legend>
-                </div>
-                <div class="card-body collapse"  id="collapseQueryRead">
-                    <form>
-                        <div class="row .navbar-brand" >
-                            <div class="col-md-12 col-sm-12" class="form-group">
-                            <a>Product ID</a>
-                            <label for="productId" class="form-label mt-4"></label>
-                            <input type="text" class="form-control" id="productId" aria-describedby="QueryVinNumbMan" placeholder="001">
-                            </div>
-                        </div>
-                        </br>
-                        <button type="submit" onclick="FarmQueryData(event)" class="btn btn-fill btn-secondary rounded-pill">Submit</button></br>
-                    </form>
-                </div>
-            </div>
+        <div class="col-md-5 col-sm-12"></div>
+        <div class="col-md-4 col-sm-12">
+            <button type="submit" onclick="allOrders()" class="btn btn-fill btn-primary rounded-pill">Show All Orders</button>
         </div>
-        <div class="col-md-3 col-sm-12"></div>
+        <div class="col-md-3 col-sm-12">
+        </div>
+
     </div>
-</div>
-</br>
+</div>  --}}
+
 
 <div class="container-fluid">
     <div class="row rowBox" >
@@ -188,7 +145,8 @@
                   <td>{{this.Record.bestBefore}}</td>
                   <td>{{this.Record.ownedBy}}</td>
                   <td>{{this.Record.quantity}}</td>
-                  <td><button class="btn btn-success filled" onClick="getMatchingOrders('{{this.Key}}');">Check for orders</button></td>
+                  <td><button class="btn btn-success filled" onClick="getMatchingOrders('{{this.Key}}');">Check for Orders</button></td>
+                  <td><button class="btn btn-danger filled" onClick="DeleteItem('{{this.Key}}');">Delete Product</button></td>
 
               </tr>
               {{!-- {{/ifequals}} --}}

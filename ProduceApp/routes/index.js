@@ -6,6 +6,7 @@ let eventClient = new Events()
 eventClient.contractEventListner("farmer", "Admin", "agrochannel",
 "Chaincode", "ProduceContract", "addProduceEvent")
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   farmerClient = new clientApplication();
@@ -36,16 +37,9 @@ router.get('/event', function(req, res, next) {
   console.log("Event Response %%%$$^^$%%$",eventClient.getEvents().toString())
   var event = eventClient.getEvents().toString()
   res.send({carEvent: event})
-  // .then(array => {
-  //   console.log("Value is #####", array)
-  //   res.send(array);
-  // }).catch(err => {
-  //   console.log("errors are ", err)
-  //   res.send(err)
-  // })
-  // res.render('index', { title: 'Dealer Dashboard' });
-});
+  });
 
+  
 router.get('/farmer', function(req, res, next) {
   let farmerClient = new clientApplication();
  
@@ -59,9 +53,7 @@ router.get('/farmer', function(req, res, next) {
   )
   .then(produces => {
     const dataBuffer = produces.toString();
-    console.log("produces are ", produces.toString())
     const value = JSON.parse(dataBuffer)
-    console.log("History DataBuffer is",value)
     res.render('farmer', { title: 'Farmer Dashboard', itemList: value});
   }).catch(err => {
     res.render("error", {
@@ -72,8 +64,28 @@ router.get('/farmer', function(req, res, next) {
 });
 
 router.get('/buyer', function(req, res, next) {
-  res.render('buyer', { title: 'Buyer Dashboard' });
+  let buyerClient = new clientApplication();
+ 
+  buyerClient.generatedAndEvaluateTxn(
+      "buyer",
+      "Admin",
+      "agrochannel", 
+      "Chaincode",
+      "ProduceContract",
+      "queryAllProduces"
+  )
+  .then(produces => {
+    const dataBuffer = produces.toString();
+    const value = JSON.parse(dataBuffer)
+    res.render('buyer', { title: 'Buyer Dashboard', itemList: value});
+  }).catch(err => {
+    res.render("error", {
+      message: `Some error occured`,
+      callingScreen: "error",
+    })
+  })
 });
+
 
 router.post('/farmerwrite',function(req,res){
 
@@ -134,16 +146,12 @@ router.post('/farmread',async function(req,res){
 router.post('/createOrder',async function(req,res){
   const orderNumber = req.body.orderNumber;
   const produceName = req.body.produceName;
-  const harvestDate = req.body.harvestDate;
-  const bestBefore = req.body.bestBefore;
   const quantity = req.body.quantity;
   const buyerName = req.body.buyerName;
   let BuyerClient = new clientApplication();
 
   const transientData = {
     produceName: Buffer.from(produceName),
-    harvestDate: Buffer.from(harvestDate),
-    bestBefore: Buffer.from(bestBefore),
     quantity: Buffer.from(quantity),
     buyerName: Buffer.from(buyerName)
   }
@@ -165,6 +173,29 @@ router.post('/createOrder',async function(req,res){
 
  })
 
+
+ // Delete Product
+router.post('/deleteItem',async function(req,res){
+  const productId = req.body.productId;
+  
+  let FarmerClient = new clientApplication();
+ 
+  FarmerClient.generatedAndSubmitPDC( 
+    "farmer",
+    "Admin",
+    "agrochannel", 
+    "Chaincode",
+    "ProduceContract",
+    "deleteProduce", productId)
+    .then(message => {
+      
+      res.status(200).send("Product Deleted Successfully")
+    }).catch(error =>{
+     
+      res.status(500).send({error:`Failed to delete`,message:`${error}`})
+    });
+
+ })
 
 
  router.get('/addCarEvent', async function(req, res, next) {
@@ -188,7 +219,7 @@ router.post('/createOrder',async function(req,res){
     "Chaincode",
     "ProduceContract",
     "checkMatchingOrders", productId).then(message => {
-    console.log("Message response",message)
+    // console.log("Message response",message)
     var dataBuffer = message.toString();
     console.log(dataBuffer)
     var data =[];
@@ -227,9 +258,29 @@ router.post('/createOrder',async function(req,res){
    
     res.send({orderData : message.toString()});
   }).catch(error => {
-    alert('Error occured')
+      console.log('Error occured' + error);
+      // alert(error);
   })
 
+ })
+
+ router.post('/deleteOrder',async function(req,res){
+  //  console.log("Deleting Order****************************")
+  const orderNumber = req.body.orderNumber;
+  // console.log("Order number" +orderNumber)
+  let FarmerClient = new clientApplication();
+  FarmerClient.generatedAndSubmitPDC( 
+    "farmer",
+    "Admin",
+    "agrochannel", 
+    "Chaincode",
+    "OrderContract",
+    "deleteOrder", orderNumber).then(message => {
+        // console.log("Order deleted")
+        res.status(200).send("Order Deleted Successfully")
+        }).catch(error =>{
+          res.status(500).send({error:`Failed to delete`,message:`${error}`})
+        });
  })
 
 

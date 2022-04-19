@@ -24,7 +24,7 @@ margin-left: 10px;
   border-radius: 5px;
 } */
 .jumbotronManufacturer {
-  background: linear-gradient(white, tomato);
+  background: linear-gradient(white, rgb(123, 255, 71));
   background-size: cover;
 }
 
