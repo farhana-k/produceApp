@@ -200,13 +200,13 @@ router.post('/createOrder',async function(req,res){
         for (i = 0; i < value.length; i++) {
             array.push({
                "orderId": `${value[i].Key}`,"productId":`${productId}`,
-                "productName": `${value[i].Record.productName}`, "quantity":`${value[i].Record.quantity}`, 
+                "productName": `${value[i].Record.produceName}`, "quantity":`${value[i].Record.quantity}`, 
                 "buyerName": `${value[i].Record.buyerName}`,"assetType": `${value[i].Record.assetType}`
             })
         }
     }
-    console.log("Array value is ", array)
-    console.log("Car id sent",productId)
+    // console.log("Array value is ", array)
+    // console.log("Car id sent",productId)
     res.render('matchOrder', { itemList: array , title: "Matching Orders"})
 
   });
@@ -229,6 +229,27 @@ router.post('/createOrder',async function(req,res){
   }).catch(error => {
     alert('Error occured')
   })
+
+ })
+
+
+ router.post('/match',async function(req,res){
+  const orderId = req.body.orderId;
+  const productId = req.body.productId
+  let DealerClient = new clientApplication();
+  DealerClient.generatedAndSubmitTxn( 
+    "farmer",
+    "Admin",
+    "agrochannel", 
+    "Chaincode",
+    "ProduceContract",
+    "matchOrder", productId,orderId).then(message => {
+   
+      res.status(200).send("Successfully Matched order")
+    }).catch(error =>{
+     
+      res.status(500).send({error:`Failed to Match Order`,message:`${error}`})
+    });
 
  })
 

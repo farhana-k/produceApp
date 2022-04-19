@@ -25,8 +25,9 @@
                 <table class="table" style="width:100%">
                     <thead id="colored-table">
                         <th>Order Id</th>
-                        <th>Product Id</th>
+                        {{!-- <th>Product Id</th> --}}
                         <th>Product</th>
+                        <th>Quantity</th>
                         {{!-- <th>Date Harvested</th>
                         <th>Expiry Date</th> --}}
                         <th>Buyer Name</th>
@@ -37,13 +38,13 @@
                         {{#each itemList}}
                         <tr>
                             <td>{{this.orderId}}</td>
-                            <td>{{this.productId}}</td>
+                            {{!-- <td>{{this.productId}}</td> --}}
                             <td>{{this.productName}}</td>
                             <td>{{this.quantity}}</td>
                             <td>{{this.buyerName}}</td>
                             <td>{{this.assetType}}</td>
                             {{!-- <td>{{this.assetType}}</td> --}}
-                            <td><button class="btn btn-info filled" onClick="matchOrder('{{this.orderId}}','{{this.carId}}');">Match Order</button></td>
+                            <td><button class="btn btn-info filled" onClick="matchOrder('{{this.orderId}}','{{this.productId}}');">Match Order</button></td>
 
                         </tr>
                         {{/each}}

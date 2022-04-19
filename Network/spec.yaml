@@ -3,17 +3,14 @@ fabric:
   # Declaring unique addresses of the Certificate Authorities 
   # of all organizations.
   cas:  
-  - "ca1.govt.agro.com"
   - "ca1.farmer.agro.com"
   - "ca1.buyer.agro.com"
 ############################################################### 
   # Declaring unique addresses of the peers of organisations. 
   # There can be multiple peers for each organizations
   peers: 
-  - "peer1.govt.agro.com"
-  # - "peer2.govt.agro.com"
   - "peer1.farmer.agro.com"
-  # - "peer2.farmer.agro.com"
+  # - "peer1.farmer.agro.com"
   - "peer1.buyer.agro.com"
   # - "peer2.buyer.agro.com"
 ############################################################### 

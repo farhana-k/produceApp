@@ -169,6 +169,10 @@ function getMatchingOrders(productId) {
     window.location.href = 'matchOrder?productId=' + productId;
 }
 
+function allorders(){
+    
+}
+
 function createOrder() {
     console.log("Entered the order function")
     event.preventDefault();
@@ -279,8 +283,8 @@ function readOrder() {
     }
 }
 
-function matchOrder(orderId,carId) {
-    if (!orderId|| !carId) {
+function matchOrder(orderId,productId) {
+    if (!orderId || !productId) {
         const data = {
             title: "Enter a order number",
             footer: "Order Number is mandatory",
@@ -293,7 +297,7 @@ function matchOrder(orderId,carId) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ orderId,carId})
+            body: JSON.stringify({ orderId,productId})
         })
             .then(function (response) {
                 if (response.status === 200) {
@@ -303,6 +307,7 @@ function matchOrder(orderId,carId) {
                         icon: "success"
                     }
                     swalBasic(data)
+                    window.location.href = '/farmer'
                 } else {
                     const data = {
                         title: `Failed to match order`,
