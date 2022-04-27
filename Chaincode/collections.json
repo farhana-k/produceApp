@@ -4,8 +4,8 @@
       "policy": "OR('farmer-agro-com.member', 'buyer-agro-com.member')",
       "requiredPeerCount": 1,
       "maxPeerCount": 1,
-      "blockToLive": 1,
+      "blockToLive": 10000,
       "memberOnlyRead": true
     }
   ]
-  
+
